@@ -7,7 +7,6 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-
 function rockPaperScissors(hand1, hand2) {
 
   let hand1ag = hand1.toLowerCase().trim();
