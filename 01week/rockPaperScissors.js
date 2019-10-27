@@ -7,12 +7,35 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-
 function rockPaperScissors(hand1, hand2) {
 
-  // Write code here
+  let hand1ag = hand1.toLowerCase().trim();
+  let hand2ag = hand2.toLowerCase().trim();
 
+  if (hand1ag === hand2ag) {
+    return "It's a tie!";
+  }
+  if (hand1ag === 'rock' && hand2ag === 'scissors') {
+    return "Hand one wins!";
+  }
+  if (hand1ag === 'scissors' && hand2ag === 'paper') {
+    return "Hand one wins!";
+  }
+  if (hand1ag === 'paper' && hand2ag === 'rock') {
+    return "Hand one wins!";
+  }
+  if (hand1ag === 'scissors' && hand2ag === 'rock') {
+    return "Hand two wins!";
+  }
+  if (hand1ag === 'paper' && hand2ag === 'scissors') {
+    return "Hand two wins!";
+  }
+  if (hand1ag === 'rock' && hand2ag === 'paper') {
+    return "Hand two wins!";
+  }
 }
+
+// let trim = getPrompt.trim();
 
 function getPrompt() {
   rl.question('hand1: ', (answer1) => {
@@ -22,6 +45,8 @@ function getPrompt() {
     });
   });
 }
+
+
 
 // Tests
 
@@ -47,5 +72,5 @@ if (typeof describe === 'function') {
 } else {
 
   getPrompt();
-
+  // trim();
 }
