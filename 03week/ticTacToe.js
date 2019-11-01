@@ -73,8 +73,7 @@ function checkForWin() {
 function ticTacToe(row, column) {
   // Your code here
   // manipulate the board array based on user input (which is row and column)
-  let selectedRow = board[row];
-  selectedRow[column] = playerTurn;
+  board[row][column]= playerTurn;
 
   if (checkForWin()) {
     console.log('Weiner!!!')
