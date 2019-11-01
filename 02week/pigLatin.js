@@ -12,6 +12,7 @@ function pigLatin(word) {
   //define vowel and first letter
   word = word.toLowerCase().trim();
   const wordArray = word.split('');
+  const answerArray = wordArray.map()
   const vowels = ['a', 'e', 'i', 'o', 'u', 'y'];
   const firstLetter = wordArray[0];
   //check first letter is not a vowel
@@ -85,6 +86,9 @@ if (typeof describe === 'function') {
     it('should lowercase and trim word before translation', () => {
       assert.equal(pigLatin('HeLlO '), 'ellohay');
       assert.equal(pigLatin(' RoCkEt'), 'ocketray');
+    });
+    it('should separate two words and return them together', () => {
+      assert.equal(pigLatin('Hop Fest'), 'Ophay Estfay');
     });
   });
 } else {
