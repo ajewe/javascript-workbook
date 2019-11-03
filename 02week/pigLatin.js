@@ -7,7 +7,7 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-function pigLatinOneWord(word) {  
+function pigLatinEachWord(word) {  
 
   const wordSplit = word.split('')
 
@@ -40,15 +40,17 @@ function pigLatin(word) {
   const wordArray = word.split(' ')
   
   if (wordArray.length === 1){
-    return pigLatinOneWord(word);
+    return pigLatinEachWord(word);
   } 
   else {
-    const pigLatinWordArray = wordArray.map((word) => {
-      pigLatinOneWord(word);
+    let pigLatinWordsArray = wordArray.map((word) => {
+      return pigLatinEachWord(word)
     })
+    let wordsString = '';
+    wordsString = pigLatinWordsArray.join(' ')
+    return wordsString
   }
 }
-
 
 function getPrompt() {
   rl.question('word ', (answer) => {
@@ -79,7 +81,7 @@ if (typeof describe === 'function') {
       assert.equal(pigLatin(' RoCkEt'), 'ocketray');
     });
     it('should separate two words and return them together', () => {
-      assert.equal(pigLatin('Hop Fest'), 'Ophay Estfay');
+      assert.equal(pigLatin('Hop Fest'), 'ophay estfay');
     });
   });
 } else {
