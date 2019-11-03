@@ -7,55 +7,46 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
+function pigLatinOneWord(word) {  
 
-function pigLatin(word) {
+  const wordSplit = word.split('')
+
   //define vowel and first letter
-  word = word.toLowerCase().trim();
-  const wordArray = word.split('');
-  const answerArray = wordArray.map()
   const vowels = ['a', 'e', 'i', 'o', 'u', 'y'];
-  const firstLetter = wordArray[0];
+  const firstLetter = wordSplit[0];
+
   //check first letter is not a vowel
-
-  // if word[0] === 'a' || 'e' || 'i' || 'o' || "u" {
-  //   return word + 'yay';
-  // } else {
-  // }
-
   if (vowels.includes(firstLetter)) {
     return word + 'yay';
   }
 
-    // for (let i = 0; i < word.length; i++) {
-    //   console.log(word[i]);
-    //   if (i === 0 && vowels.includes(word[i])) {
-    //     return word + 'yay';
-    //   }
-
-    let pigLatin = '';
     let cutWord = '';
     let wordString = '';
     let cutWordString = '';
 
-    for (let i = 0; i < wordArray.length; i++) {
-      if (i > 0 && vowels.includes(wordArray[i])) {
-
-        cutWord = wordArray.splice(i)
-        wordString = wordArray.join('')
-        cutWordString = cutWord.join('')
-        return cutWordString + wordString + 'ay'
+  for (let i = 0; i < wordSplit.length; i++) {
+    if (i > 0 && vowels.includes(wordSplit[i])) {
+      cutWord = wordSplit.splice(i)
+      wordString = wordSplit.join('')
+      cutWordString = cutWord.join('')
+      return cutWordString + wordString + 'ay'
       }
     }
     return word + 'ay'
-  // const checkEach = (word) => { 
-    
-  // }
+}
 
-  //check second letter is not a vowel
-  //check... letter not a vowel
-  //if starts with a vowel add "yay"
+function pigLatin(word) {
+  word = word.toLowerCase().trim();
+  const wordArray = word.split(' ')
   
-
+  if (wordArray.length === 1){
+    return pigLatinOneWord(word);
+  } 
+  else {
+    const pigLatinWordArray = wordArray.map((word) => {
+      pigLatinOneWord(word);
+    })
+  }
 }
 
 
