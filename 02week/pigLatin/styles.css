@@ -5,7 +5,7 @@ body {
   align-items: center;
 }
 
-.text-box {
+#text-box {
   display: block;
   margin: 100px 10px 10px;
   font-size: 16px;
@@ -25,7 +25,7 @@ p {
   font-size: 16px;
 }
 
-.button {
+#button {
   margin:10px 10px 25px;
   width: 100px;
 }

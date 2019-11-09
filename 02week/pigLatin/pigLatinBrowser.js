@@ -1,9 +1,16 @@
 'use strict';
 
+document.getElementById('button').onclick = getPrompt;
+
+function getPrompt() {
+  let input = document.getElementById('text-box').value
+  document.getElementById('output').innerHTML = pigLatin(input)
+  document.getElementById('text-box').value = '';
+  return false
+  };
+
 function pigLatinEachWord(word) {  
-
   const wordSplit = word.split('')
-
   //define vowel and first letter
   const vowels = ['a', 'e', 'i', 'o', 'u', 'y'];
   const firstLetter = wordSplit[0];
@@ -12,7 +19,6 @@ function pigLatinEachWord(word) {
   if (vowels.includes(firstLetter)) {
     return word + 'yay';
   }
-
     let cutWord = '';
     let wordString = '';
     let cutWordString = '';
@@ -22,10 +28,12 @@ function pigLatinEachWord(word) {
       cutWord = wordSplit.splice(i)
       wordString = wordSplit.join('')
       cutWordString = cutWord.join('')
+      // console.log(cutWordString + wordString + 'ay')
       return cutWordString + wordString + 'ay'
       }
     }
     return word + 'ay'
+
 }
 
 function pigLatin(word) {
@@ -44,14 +52,6 @@ function pigLatin(word) {
     return wordsString
   }
 }
-
-function getPrompt() {
-  let input = document.getElementsByClassName('text-box')[0].value
-  pigLatin(input);
-  console.log(input);
-
-    getPrompt();
-  };
 
 // // Tests
 
