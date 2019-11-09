@@ -53,6 +53,9 @@ function pigLatin(word) {
 }
 
 function getPrompt() {
+  let input = document.getElementsByClassName('text-box')[0].value
+  pigLatin(input);
+  console.log(input);
   rl.question('word ', (answer) => {
     console.log( pigLatin(answer) );
     getPrompt();
