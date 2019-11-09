@@ -4,7 +4,7 @@
   - Pass those values to movePiece function
 
 2. Check that a piece is allowed to move (isLegal function)
-  - Use the startStack and endStack values to determine if it would be a legal      move based off the rules of the game
+  - Use the startStack and endStack values to determine if it would be a legal move based off the rules of the game
         + startStack and endStack should be different letters
         + access the numbers inside of the arrays that correspond to the startStack and endStack values ('a', 'b', and 'c'), these are the keys of the stacks object
         + A bigger number can not be placed on top of a smaller number

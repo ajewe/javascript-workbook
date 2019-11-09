@@ -21,12 +21,19 @@ function printStacks() {
 
 function movePiece() {
   // Your code here
-
+  if isLegal() {
+    // move piece
+  }
 }
 
 function isLegal() {
-  // Your code here
-
+  // take towersofHanoi and 
+  if towersOfHanoi(startStack, endStack) {
+    startStack !== endStack
+  }
+  if towersOfHanoi(startStack, endStack) {
+    
+  }
 }
 
 function checkForWin() {
