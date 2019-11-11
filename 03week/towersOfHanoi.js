@@ -21,19 +21,38 @@ function printStacks() {
 
 function movePiece() {
   // Your code here
-  if isLegal() {
-    // move piece
-  }
+  // if isLegal() {
+  //   // move piece
+  // }
 }
 
-function isLegal() {
-  // take towersofHanoi and 
-  if towersOfHanoi(startStack, endStack) {
-    startStack !== endStack
+function isLegal(start, end) {
+
+  let startArray = stacks[start];
+  let endArray = stacks[end];
+
+  // Illegal because moving from empty stack
+  if (startArray.length === 0) {
+    return false;
   }
-  if towersOfHanoi(startStack, endStack) {
-    
+  // if end column is empty, move is legal
+  if (endArray.length === 0) {
+    return true;
   }
+
+  let startElement = startArray[startArray.length - 1];
+  let endElement = endArray[endArray.length - 1];
+
+  if (start === end) {
+    console.log('invalid move!')
+    return false;
+  }
+
+  //if the last element of the end column has a higher number, not legal
+  if (startElement > endElement ) {
+    return false;
+  } 
+  return true;
 }
 
 function checkForWin() {
@@ -42,7 +61,7 @@ function checkForWin() {
 }
 
 function towersOfHanoi(startStack, endStack) {
-  // Your code here
+  isLegal(startStack, endStack);
 
 }
 

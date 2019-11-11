@@ -9,7 +9,7 @@
         + access the numbers inside of the arrays that correspond to the startStack and endStack values ('a', 'b', and 'c'), these are the keys of the stacks object
         + A bigger number can not be placed on top of a smaller number
             - Any number can be placed onto an empty stack (array inside the stacks object)
-  - Nice to have: return an error message (string) telling the user if their        input is invalid (should be 'a', 'b', or 'c')
+  - Nice to have: return an error message (string) telling the user if their input is invalid (should be 'a', 'b', or 'c')
 
 3. Move a piece from one stack to another (movePiece function)
   - Update the stacks object inside of the movePiece function using the startStack and endStack values
