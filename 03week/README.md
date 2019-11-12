@@ -17,5 +17,5 @@
   - maybe use .pop?, .shift?, or different array methods
 
 4. Check to see if the game is won (checkForWin function)
-  - When all the blocks are stacked into column 2 or 1 return true otherwise      false
+  - When all the blocks are stacked into column 2 or 1 return true otherwise false
   - Nice to have: console log a winning message
