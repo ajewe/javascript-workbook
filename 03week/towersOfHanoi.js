@@ -142,8 +142,36 @@ if (typeof describe === 'function') {
     });
   });
 
+  //new test 1
+  describe('#isLegal()', () => {
+    it('not allow move to same stack', () => {
+      stacks = {
+        a: [4, 3, 2],
+        b: [1],
+        c: []
+      };
+      assert.equal(isLegal('a', 'a'), false);
+  });
+  });
+
+  //new test 2
+  describe('#checkArrayMatch()', () => {
+    it('returns true if arrays match', () => {
+      let arry1 = [1,2,3]
+      let arry2 = [1,2,3]
+
+      assert.equal(checkArrayMatch(arry1, arry2), true);
+    })
+  });
+
+  //new test 3
+  describe('#checkForWin() in C', () => {
+    it('should detect a win IN C', () => {
+      stacks = { a: [], b: [], c: [4, 3, 2, 1] };
+      assert.equal(checkForWin(), true);
+    });
+  });
+
 } else {
-
   getPrompt();
-
 }
