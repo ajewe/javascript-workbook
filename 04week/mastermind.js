@@ -55,12 +55,30 @@ function generateHint(guess) {
     };
   //return a string representation of redPegs and whitePegs variables
   return `${redPegs}-${whitePegs}`;
-}
+};
 
 function mastermind(guess) {
   solution = 'abcd'; // Comment this out to generate a random solution
-  // your code here
-}
+  
+  if (guess === solution) {
+    console.log('You guessed it!');
+    return 'You guessed it!';
+  }
+
+  let hint = generateHint(guess);
+
+  board.push(hint + ' ' + guess);
+
+  if (board.length === 10) {
+    board = [];
+    console.log(`You ran out of turns! The solution was ${solution}`);
+    return;
+  } else {
+    console.log('Guess again');
+    return;
+  }
+ 
+};
 
 
 function getPrompt() {
