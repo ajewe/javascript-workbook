@@ -27,4 +27,25 @@ let i = 1;
     }
    }
   };
+
+  let arrayOfPersons = [
+    {
+      firstName: "Jane",
+      lastName: "Doe",
+      birthDate: 'Jan 5, 1925',
+      gender: "female"
+     },
+     {
+      firstName: "Jane",
+      lastName: "Doe",
+      birthDate: 'Jan 5, 1925',
+      gender: "female"
+     },
+     {
+      firstName: "Jane",
+      lastName: "Doe",
+      birthDate: 'Jan 5, 1925',
+      gender: "female"
+     },
+  ];
  
