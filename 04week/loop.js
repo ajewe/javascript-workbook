@@ -1,4 +1,4 @@
-
+// 1
 let i = 1;
 
  do {
@@ -7,6 +7,7 @@ let i = 1;
  }
  while (i <= 1000);
 
+//  2
  let person = {
   firstName: "Jane",
   lastName: "Doe",
@@ -14,7 +15,7 @@ let i = 1;
   gender: "female"
  };
 
-
+// 3
  let x;
 
  for (x in person) {
@@ -28,6 +29,7 @@ let i = 1;
    }
   };
 
+  // 4
   let arrayOfPersons = [
     {
       firstName: "Jane",
@@ -36,16 +38,34 @@ let i = 1;
       gender: "female"
      },
      {
-      firstName: "Jane",
-      lastName: "Doe",
-      birthDate: 'Jan 5, 1925',
+      firstName: "Bane",
+      lastName: "Boe",
+      birthDate: 'Jan 5, 1964',
       gender: "female"
      },
      {
-      firstName: "Jane",
-      lastName: "Doe",
-      birthDate: 'Jan 5, 1925',
-      gender: "female"
+      firstName: "Lane",
+      lastName: "Loe",
+      birthDate: 'Jan 5, 1999',
+      gender: "male"
      },
   ];
+
+  // 5
+  arrayOfPersons.map(x =>
+    console.log(x));
  
+  // 6
+  let filteredArray = arrayOfPersons.filter(persons => {
+    return persons.gender === 'male'
+  });
+  
+  console.log(filteredArray);
+
+  // 7
+  let filteredArrayYear = arrayOfPersons.filter(person => {
+    let splitted = person.birthDate.split(' ')
+    return splitted[2] < 1990
+  });
+
+  console.log(filteredArrayYear);
