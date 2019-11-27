@@ -101,8 +101,11 @@ class Board {
     return this.grid[row][column];
   }
 
-  killChecker(){
-
+  killChecker(position){
+    let checker = this.selectChecker(position[0], position[1]);
+    let spliceOutChecker = this.checkers.indexOf(checker);
+    this.checkers.splice(spliceOutChecker, 1);
+    this.grid[position[0]][position[1]] = null;
   }
 }
 
@@ -123,6 +126,20 @@ class Game {
     this.board.grid[splitStart[0]][splitStart[1]] = null;
     //set the spot at the end rowcol coord to the checker
     this.board.grid[splitEnd[0]][splitEnd[1]] = checker
+    //check to see if the distance of the start and end row is 2
+    let absoluteRow = Math.abs(splitStart[0] - splitEnd[0]);
+
+    let posRow = (splitEnd[0] - splitStart[0])/2;
+    let posColumn = (splitEnd[1] - splitStart[1])/2;
+    
+    let killPosRow = splitEnd[0] - posRow;
+    let killPosCol = splitEnd[1] - posColumn;
+
+    if (absoluteRow === 2) {
+      let killPosition = []
+      killPosition.push(killPosRow, killPosCol);
+      return this.board.killChecker(killPosition);
+    }
   }
 }
 
