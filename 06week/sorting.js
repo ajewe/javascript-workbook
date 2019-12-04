@@ -28,7 +28,7 @@ console.log(sumEvens);
 // Find the index of the first value when added to it's index = 512 (#ATX!!)
 const atxIdx;
 
-
+//if sum [i] and numberArray[i] = 512, then i = atxIdx (?)
 
 console.log(`index: ${atxIdx}, value: ${nums[atxIdx]}`);
 
