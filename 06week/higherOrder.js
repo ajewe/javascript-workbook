@@ -7,16 +7,35 @@ const assert = require('assert');
 // }
 
 function map(arr, callback) {
-  // Your code here
-}
+  //takes each item in an array, does something to it, puts in a new array
+  let newArr = [];
+  
+  for (let i = 0; i < arr.length; i++) {
+    newArr.push(callback(arr[i]));
+  }
+  return newArr;
+};
 
 function filter(arr, callback) {
-  // Your code here
-}
+  // each item that passes callback goes in new array
+  let arrFilter = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (callback(arr[i]) === true) {
+      arrFilter.push(arr[i])
+    }
+  } return arrFilter;
+};
 
 function reduce(arr, callback) {
-  // Your code here
-}
+  // go through each item in array, apply callback fxn for each item, put in accumulator
+  let accum = 0;
+
+  for (let i = 0; i < arr.length; i++) {
+    accum = callback(accum, arr[i])
+  }
+  return accum;
+};
 
 // function some(arr, callback) {
 //   // Your code here
