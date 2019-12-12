@@ -56,9 +56,14 @@ const redTeam = []
 
 //requires canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience
 class Player {
-  constructor(){
-
+  constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience){
+    this.canThrowBall = canThrowBall;
+    this.canDodgeBall = canDodgeBall;
+    this.hasPaid = hasPaid;
+    this.isHealthy = isHealthy;
+    this.yearsExperience = yearsExperience;
   }
+  //functions go here that player will do
 }
 
 //extend dodgeBallPlayer for Blue Team and Red Team (where each has mascot and team color)
@@ -70,8 +75,8 @@ class BlueTeammate extends Player {
 }
 
 class RedTeammate extends Player {
-  constructor() {
-    super();
+  constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience) {
+    super(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience);
   }
 
 }
