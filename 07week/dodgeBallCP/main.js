@@ -54,14 +54,26 @@ const listOfPlayers = []
 const blueTeam = []
 const redTeam = []
 
-class player {
-  constructor(){}
+//requires canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience
+class Player {
+  constructor(){
+
+  }
 }
-class blueTeammate {
-  constructor(){}
+
+//extend dodgeBallPlayer for Blue Team and Red Team (where each has mascot and team color)
+class BlueTeammate extends Player {
+  constructor(){
+    super();
+  }
+
 }
-class redTeammate {
-  constructor(){}
+
+class RedTeammate extends Player {
+  constructor() {
+    super();
+  }
+
 }
 
 const listPeopleChoices = () => {
