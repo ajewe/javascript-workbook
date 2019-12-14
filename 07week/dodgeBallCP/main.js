@@ -56,7 +56,8 @@ let redTeam = []
 
 //requires canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience
 class Player {
-  constructor(name, canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience){
+  constructor(index, name, canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience){
+    this.index = index;
     this.name = name;
     this.canThrowBall = canThrowBall;
     this.canDodgeBall = canDodgeBall;
@@ -64,14 +65,40 @@ class Player {
     this.isHealthy = isHealthy;
     this.yearsExperience = yearsExperience;
   }
-  //these properties are useless therefore this assignment is useless
+
+  newPlayer(index) {
+    this.index = index
+    //push to new array that displays under dodge ball players, remove from list of people
+    let spliced = arrOfPeople.splice(index, 1);
+    listOfPlayers.push(spliced[0])
+    console.log(listOfPlayers);
+    console.log('yo');
+
+    //remove list then refresh with new list
+    let listPeople = document.getElementById("people");
+    while (listPeople.hasChildNodes()) {
+      listPeople.removeChild(listPeople.firstChild);
+    }
+    listPeopleChoices();
+      
+    //remove list then refresh with new list
+    let listPlayerz = document.getElementById("players");
+    while (listPlayerz.hasChildNodes()) {
+      listPlayerz.removeChild(listPlayerz.firstChild);
+    }
+    listPlayerChoices();
   }
+  }
+
+
+
+
 
 
 //extend dodgeBallPlayer for Blue Team and Red Team (where each has mascot and team color)
 class BlueTeammate extends Player {
-  constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience, mascot, teamColor){
-    super(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience);
+  constructor(index, name, canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience, mascot, teamColor){
+    super(index, name, canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience);
     this.mascot = mascot;
     this.teamColor = teamColor;
   }
@@ -79,12 +106,15 @@ class BlueTeammate extends Player {
 }
 
 class RedTeammate extends Player {
-  constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience, mascot, teamColor) {
-    super(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience);
+  constructor(index, name, canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience, mascot, teamColor) {
+    super(index, name, canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience);
     this.mascot = mascot;
     this.teamColor = teamColor;
   }
-  //fnxs
+  newRedPlayer(index) {
+    this.index = index
+
+  }
 }
 
 const listPeopleChoices = () => {
@@ -100,10 +130,12 @@ const listPeopleChoices = () => {
   })
 }
 
-//when click red button, adds player to red team extension
+//when click red/blue button, adds player to red/blue team extension
+// use 'this' keyword to assign player to the team they chose with onclick
 const makeRed = (person, index) => {
-  let player = new RedTeammate(person.name, true, true, true, true, 7, 'redneck', 'Red');
-  newRedPlayer(index);
+  let redPlayer = new RedTeammate(index, person.name, true, true, true, true, 7, 'redneck', 'Red');
+  redPlayer.newRedPlayer(index);
+}
 
 const listPlayerChoices = () => {
   const playerElement = document.getElementById('players')
@@ -127,28 +159,8 @@ const listPlayerChoices = () => {
   })
 }
 
-function newPlayer(index) {
-  //push to new array that displays under dodge ball players, remove from list of people
-  let spliced = arrOfPeople.splice(index, 1);
-  listOfPlayers.push(spliced[0])
-  
-  //remove list then refresh with new list
-  let listPeople = document.getElementById("people");
-  while (listPeople.hasChildNodes()) {
-    listPeople.removeChild(listPeople.firstChild);
-  }
-  listPeopleChoices();
-
-  //remove list then refresh with new list
-  let listPlayerz = document.getElementById("players");
-  while (listPlayerz.hasChildNodes()) {
-    listPlayerz.removeChild(listPlayerz.firstChild);
-  }
-  listPlayerChoices();
-}
-
 //want the "Make Player" button to add that player to dodgeball class
 const makePlayer = (person, index) => {
   let player = new Player(person.name, true, true, true, true, 7);
-  newPlayer(index);
+  player.newPlayer(index);
 }
