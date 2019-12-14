@@ -50,50 +50,105 @@ const arrOfPeople = [
   },
 ]
 
-const listOfPlayers = []
-const blueTeam = []
-const redTeam = []
+let listOfPlayers = []
+let blueTeam = []
+let redTeam = []
 
 //requires canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience
 class Player {
-  constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience){
+  constructor(name, canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience){
+    this.name = name;
     this.canThrowBall = canThrowBall;
     this.canDodgeBall = canDodgeBall;
     this.hasPaid = hasPaid;
     this.isHealthy = isHealthy;
     this.yearsExperience = yearsExperience;
   }
-  //functions go here that player will do
-}
+  //these properties are useless therefore this assignment is useless
+  }
+
 
 //extend dodgeBallPlayer for Blue Team and Red Team (where each has mascot and team color)
 class BlueTeammate extends Player {
-  constructor(){
-    super();
+  constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience, mascot, teamColor){
+    super(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience);
+    this.mascot = mascot;
+    this.teamColor = teamColor;
   }
-
+  //fnxs
 }
 
 class RedTeammate extends Player {
-  constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience) {
+  constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience, mascot, teamColor) {
     super(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience);
+    this.mascot = mascot;
+    this.teamColor = teamColor;
   }
-
+  //fnxs
 }
 
 const listPeopleChoices = () => {
   const listElement = document.getElementById('people')
-  arrOfPeople.map(person => {
+  arrOfPeople.map((person, index) => {
     const li = document.createElement("li")
     const button = document.createElement("button")
     button.innerHTML = "Make Player"
-    button.addEventListener('click', function() {makePlayer(person.id)} )
+    button.addEventListener('click', function() {makePlayer(person, index)} )
     li.appendChild(button)
     li.appendChild(document.createTextNode(person.name + " - " + person.skillSet))
     listElement.append(li)
   })
 }
 
-const makePlayer = (id) => {
-  console.log(`li ${id} was clicked!`)
+//when click red button, adds player to red team extension
+const makeRed = (person, index) => {
+  let player = new RedTeammate(person.name, true, true, true, true, 7, 'redneck', 'Red');
+  newRedPlayer(index);
+
+const listPlayerChoices = () => {
+  const playerElement = document.getElementById('players')
+  console.log(listOfPlayers)
+  listOfPlayers.map((person, index) => {
+    const li = document.createElement("li")
+    const redButton = document.createElement("button")
+    const blueButton = document.createElement("button")
+    redButton.innerHTML = "Join red"
+    redButton.onclick = () => {
+      makeRed(person, index)
+    }
+    blueButton.innerHTML = "Join blue"
+    blueButton.onclick = () => {
+      makeBlue(person, index)
+    }
+    li.appendChild(redButton);
+    li.appendChild(blueButton);
+    li.appendChild(document.createTextNode(person.name + " - " + person.skillSet))
+    playerElement.append(li)
+  })
+}
+
+function newPlayer(index) {
+  //push to new array that displays under dodge ball players, remove from list of people
+  let spliced = arrOfPeople.splice(index, 1);
+  listOfPlayers.push(spliced[0])
+  
+  //remove list then refresh with new list
+  let listPeople = document.getElementById("people");
+  while (listPeople.hasChildNodes()) {
+    listPeople.removeChild(listPeople.firstChild);
+  }
+  listPeopleChoices();
+
+  //remove list then refresh with new list
+  let listPlayerz = document.getElementById("players");
+  while (listPlayerz.hasChildNodes()) {
+    listPlayerz.removeChild(listPlayerz.firstChild);
+  }
+  listPlayerChoices();
+}
+
+//want the "Make Player" button to add that player to dodgeball class
+const makePlayer = (person, index) => {
+  let player = new Player(person.name, true, true, true, true, 7);
+  newPlayer(index);
 }
