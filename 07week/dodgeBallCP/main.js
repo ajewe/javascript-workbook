@@ -72,28 +72,8 @@ class Player {
     let spliced = arrOfPeople.splice(index, 1);
     listOfPlayers.push(spliced[0])
     console.log(listOfPlayers);
-    console.log('yo');
-
-    //remove list then refresh with new list
-    let listPeople = document.getElementById("people");
-    while (listPeople.hasChildNodes()) {
-      listPeople.removeChild(listPeople.firstChild);
-    }
-    listPeopleChoices();
-      
-    //remove list then refresh with new list
-    let listPlayerz = document.getElementById("players");
-    while (listPlayerz.hasChildNodes()) {
-      listPlayerz.removeChild(listPlayerz.firstChild);
-    }
-    listPlayerChoices();
   }
   }
-
-
-
-
-
 
 //extend dodgeBallPlayer for Blue Team and Red Team (where each has mascot and team color)
 class BlueTeammate extends Player {
@@ -102,7 +82,27 @@ class BlueTeammate extends Player {
     this.mascot = mascot;
     this.teamColor = teamColor;
   }
-  //fnxs
+
+  // use 'this' keyword to assign player to the team they chose with onclick
+  newBluePlayer(index) {
+    this.index = index
+    //new array
+    let spliceBlue = listOfPlayers.splice(index, 1);
+    blueTeam.push(spliceBlue[0])
+    console.log(blueTeam);
+    //update DOM
+    let listPlayers = document.getElementById("players");
+    while (listPlayers.hasChildNodes()) {
+      listPlayers.removeChild(listPlayers.firstChild);
+    }
+    listPlayerChoices();
+      
+    let listBlue = document.getElementById("blue");
+    while (listBlue.hasChildNodes()) {
+      listBlue.removeChild(listBlue.firstChild);
+    }
+    listBluePeople();
+  }
 }
 
 class RedTeammate extends Player {
@@ -111,10 +111,62 @@ class RedTeammate extends Player {
     this.mascot = mascot;
     this.teamColor = teamColor;
   }
+
+  // use 'this' keyword to assign player to the team they chose with onclick
   newRedPlayer(index) {
     this.index = index
-
+    //new array
+    let spliceRed = listOfPlayers.splice(index, 1);
+    redTeam.push(spliceRed[0])
+    console.log(redTeam);
+    //update DOM
+    let listPlayers = document.getElementById("players");
+    while (listPlayers.hasChildNodes()) {
+      listPlayers.removeChild(listPlayers.firstChild);
+    }
+    listPlayerChoices();
+      
+    let listRed = document.getElementById("red");
+    while (listRed.hasChildNodes()) {
+      listRed.removeChild(listRed.firstChild);
+    }
+    listRedPeople();
   }
+}
+
+const updateList = () => {
+  //remove list then refresh with new list
+  let listPeople = document.getElementById("people");
+  while (listPeople.hasChildNodes()) {
+    listPeople.removeChild(listPeople.firstChild);
+  }
+  listPeopleChoices();
+    
+  //remove list then refresh with new list
+  let listPlayerz = document.getElementById("players");
+  while (listPlayerz.hasChildNodes()) {
+    listPlayerz.removeChild(listPlayerz.firstChild);
+  }
+  listPlayerChoices();
+  }
+
+//want the "Make Player" button to add that player to dodgeball class
+const makePlayer = (person, index) => {
+  let player = new Player(index, person.name, true, true, true, true, 7);
+  player.newPlayer(index);
+  updateList();
+
+}
+
+//when click red/blue button, adds player to red/blue team extension
+const makeRed = (person, index) => {
+  let redPlayer = new RedTeammate(index, person.name, true, true, true, true, 7, 'redneck', 'red');
+  redPlayer.newRedPlayer(index);
+}
+
+const makeBlue = (person, index) => {
+  let bluePlayer = new BlueTeammate(index, person.name, true, true, true, true, 7, 'blueneck', 'blue');
+  bluePlayer.newBluePlayer(index);
 }
 
 const listPeopleChoices = () => {
@@ -130,16 +182,9 @@ const listPeopleChoices = () => {
   })
 }
 
-//when click red/blue button, adds player to red/blue team extension
-// use 'this' keyword to assign player to the team they chose with onclick
-const makeRed = (person, index) => {
-  let redPlayer = new RedTeammate(index, person.name, true, true, true, true, 7, 'redneck', 'Red');
-  redPlayer.newRedPlayer(index);
-}
-
 const listPlayerChoices = () => {
   const playerElement = document.getElementById('players')
-  console.log(listOfPlayers)
+
   listOfPlayers.map((person, index) => {
     const li = document.createElement("li")
     const redButton = document.createElement("button")
@@ -159,8 +204,51 @@ const listPlayerChoices = () => {
   })
 }
 
-//want the "Make Player" button to add that player to dodgeball class
-const makePlayer = (person, index) => {
-  let player = new Player(person.name, true, true, true, true, 7);
-  player.newPlayer(index);
+const listBluePeople = () => {
+  const blueElement = document.getElementById('blue')
+  
+  blueTeam.map(person => {
+    const li = document.createElement("li")
+    li.appendChild(document.createTextNode(person.name + " - " + person.skillSet))
+    blueElement.append(li)
+  })
+}
+
+const listRedPeople = () => {
+  const redElement = document.getElementById('red')
+  
+  redTeam.map(person => {
+    const li = document.createElement("li")
+    li.appendChild(document.createTextNode(person.name + " - " + person.skillSet))
+    redElement.append(li)
+  })
+}
+
+//tests
+if (typeof describe === 'function'){
+  let assert = require('assert');
+
+  describe('Player', function(){
+    it('has canThrowBall, canDodgeBall, hasPaid, isHealthy', function(){
+      var player1 = new Player(1, 'Miche', true, true, true, true, 6);
+      assert.equal(player1.canThrowBall, true);
+      assert.equal(player1.canDodgeBall, true);
+      assert.equal(player1.hasPaid, true);
+      assert.equal(player1.isHealthy, true);
+    });
+
+    it('has mascot and teamColor', function(){
+      var bluePlayer = new BlueTeammate(6, 'Ashe', true, true, true, true, 7, 'blueneck', 'blue');
+      assert.equal(bluePlayer.mascot, 'blueneck');
+      assert.equal(bluePlayer.teamColor, 'blue');
+    });
+
+    it('can add to array', function(){
+      var player1 = new Player(0, 'Charles Young', true, true, true, true, 6);
+      listOfPlayers = []
+      player1.newPlayer(0);
+      assert.equal(listOfPlayers.length, 1);
+      assert.equal(listOfPlayers[0].name, 'Charles Young');
+    });
+  })
 }
