@@ -25,22 +25,65 @@ function printBoard() {
 
 function horizontalWin() {
   // Your code here
+  //check the rows of the board for a match
+  if (board[0][0] === playerTurn && board[0][1] === playerTurn && board[0][2] === playerTurn) {
+    return true;
+  } else if (board[1][0] === playerTurn && board[1][1] === playerTurn && board[1][2] === playerTurn) {
+    return true;
+  } else if (board[2][0] === playerTurn && board[2][1] === playerTurn && board[2][2] === playerTurn) {
+    return true;
+  }
+    return false;
 }
 
 function verticalWin() {
   // Your code here
+  //check the columns of the board for a match
+  if(board[0][0] === playerTurn && board[1][0] === playerTurn && board[2][0] === playerTurn) {
+    return true;
+  } else if (board[0][1] === playerTurn && board[1][1] === playerTurn && board[2][1] === playerTurn) {
+    return true;
+  } else if (board[0][2] === playerTurn && board[1][2] === playerTurn && board[2][2] === playerTurn) {
+    return true;
+  }
+  return false;
 }
 
 function diagonalWin() {
   // Your code here
+  //check for a line pattern top left to bottom right on the board
+  //check for a line pattern top right to bottom left on the board
+  if(board[0][0] === playerTurn && board[1][1] === playerTurn && board [2][2] === playerTurn) {
+    return true;
+  } else if (board[0][2] === playerTurn && board[1][1] === playerTurn && board [2][0] === playerTurn) {
+    return true;
+  }
+    return false;
 }
 
 function checkForWin() {
   // Your code here
+  //check for horizontal, or vertical or diag win
+  //return true if any of those checks return true
+  if (horizontalWin() || verticalWin() || diagonalWin()) {
+    return true;
+  } return false;
 }
 
 function ticTacToe(row, column) {
   // Your code here
+  // manipulate the board array based on user input (which is row and column)
+  board[row][column]= playerTurn;
+
+  if (checkForWin()) {
+    console.log('Weiner!!!')
+   }
+  // manipulate the player turn variable and switch from either if x to o, or if o to x
+   if (playerTurn === 'X') {
+     playerTurn = 'O';
+   } else {
+     playerTurn = 'X';
+   }
 }
 
 function getPrompt() {
@@ -48,8 +91,8 @@ function getPrompt() {
   console.log("It's Player " + playerTurn + "'s turn.");
   rl.question('row: ', (row) => {
     rl.question('column: ', (column) => {
-      ticTacToe(row, column);
-      getPrompt();
+        ticTacToe(row, column) 
+        getPrompt();
     });
   });
 
