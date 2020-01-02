@@ -1,0 +1,59 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-grid {
+  width: 500px;
+  height: 500px;
+}
+
+.game-grid div {
+  border: 1px solid blue;
+  width: 32%;
+  height: 32%;
+  display: inline-block;
+}
+
+div {
+  margin: 0;
+  padding: 0;
+  vertical-align: top;
+}
+
+h1 {
+  font-size: 120px;
+  text-align: center;
+  margin: 0;
+}
+
+.tally {
+  display: flex;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+}
+
+p {
+  width: 100px;
+  height: 40px;
+  border: 1px solid gray;
+  margin: 10px 20px 10px 10px;
+  font-size: 36px;
+  text-align: center;
+}

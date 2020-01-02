@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Tic Tac Toe</title>
+  <link rel="stylesheet" href="./TTT.css">
+  
+</head>
+<body>
+<div class="main">
+<div class="game-grid">
+  <div class="box" id="box1" onclick="addGamePiece(this);"></div>
+  <div class="box" id="box12" onclick="addGamePiece(this);"></div>
+  <div class="box" id="box13" onclick="addGamePiece(this);"></div>
+  <div class="box" id="box14" onclick="addGamePiece(this);"></div>
+  <div class="box" id="box15" onclick="addGamePiece(this);"></div>
+  <div class="box" id="box16" onclick="addGamePiece(this);"></div>
+  <div class="box" id="box17" onclick="addGamePiece(this);"></div>
+  <div class="box" id="box18" onclick="addGamePiece(this);"></div>
+  <div class="box" id="box19" onclick="addGamePiece(this);"></div>
+</div>
+<div class="tally">
+  <div class="label tally1">
+    <h2>Player X</h2>
+    <p id="inputX">0</p>
+  </div>
+  <div class="label tally2">
+    <h2>Draw</h2>
+    <p id="inputDraw">0</p>
+  </div>
+  <div class="label tally3">
+    <h2>Player O</h2>
+    <p id="inputO">0</p>
+  </div>
+</div>
+</div>
+  <script src="./TTT.js"></script>
+</body>
+</html>
