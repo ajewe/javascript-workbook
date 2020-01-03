@@ -1,124 +1,50 @@
 
-
-// find location of click and add x or o
-// determine player1 or player2
-// keep score
-// find a winner via 3 in a row
-
-// let ready = confirm("Are you ready for this?");
-
-
 let previousGamePiece = null
 
 function addGamePiece(selectedElement) {
-  if (selectedElement.childElementCount === 0) {
-    let newChildElement = document.createElement('h1')
+  
+  if (selectedElement.children[0].innerHTML === ' ') {
 
     if (previousGamePiece === 'X') {
       //add text to element
-      newChildElement.innerHTML = 'O'
+      selectedElement.children[0].innerHTML = 'O'
       //set previousGamePiece
       previousGamePiece = 'O'
     } else {
       //add text to element
-      newChildElement.innerHTML = 'X'
+      selectedElement.children[0].innerHTML = 'X'
       //set previousGamePiece
       previousGamePiece = 'X'
     }
 
-    selectedElement.appendChild(newChildElement);
-
-    //check if winning ie same
-    setTimeout(checkWinTopRow, 100);
-    setTimeout(checkWinMidRow,100);
-    setTimeout(checkWinLastRow,100);
-    setTimeout(checkWinLeftCol,100);
-    setTimeout(checkWinMidCol,100);
-    setTimeout(checkWinRightCol,100);
-    setTimeout(checkWinDiag1,100);
-    setTimeout(checkWinDiag2,100);
-    setTimeout(checkDraw, 100);
+    //check if winning 
+    setTimeout(() => {
+      //checks each row
+      checkWin('box1', 'box12', 'box13');
+      checkWin('box14', 'box15', 'box16');
+      checkWin('box17', 'box18', 'box19');
+      //checks each column
+      checkWin('box1', 'box14', 'box17');
+      checkWin('box12', 'box15', 'box18');
+      checkWin('box13', 'box16', 'box19');
+      //checks both diag
+      checkWin('box1', 'box15', 'box19');
+      checkWin('box13', 'box15', 'box17');
+      //check draw
+      checkDraw();
+    }, 100);
   }
 }
 
-function checkWinTopRow() {
-  if (document.getElementById('box1').children[0].innerHTML === 'X' && document.getElementById('box12').children[0].innerHTML === 'X' && document.getElementById('box13').children[0].innerHTML === 'X') {
-    XWon();
+function checkWin(firstBox, secondBox, thirdBox) {
+
+  if (document.getElementById(firstBox).children[0].innerHTML === 'X' && document.getElementById(secondBox).children[0].innerHTML === 'X' && document.getElementById(thirdBox).children[0].innerHTML === 'X') {
+    winnerIs('X');
   }
 
-  if (document.getElementById('box1').children[0].innerHTML === 'O' && document.getElementById('box12').children[0].innerHTML === 'O' && document.getElementById('box13').children[0].innerHTML === 'O') {
-    OWon();
-  }
-}
-
-function checkWinMidRow() {
-  if (document.getElementById('box14').children[0].innerHTML === 'X' && document.getElementById('box15').children[0].innerHTML === 'X' && document.getElementById('box16').children[0].innerHTML === 'X') {
-    XWon();
-  }
-
-  if (document.getElementById('box14').children[0].innerHTML === 'O' && document.getElementById('box15').children[0].innerHTML === 'O' && document.getElementById('box16').children[0].innerHTML === 'O') {
-    OWon();
-  }
-}
-
-function checkWinLastRow() {
-  if (document.getElementById('box17').children[0].innerHTML === 'X' && document.getElementById('box18').children[0].innerHTML === 'X' && document.getElementById('box19').children[0].innerHTML === 'X') {
-    XWon();
-  }
-
-  if (document.getElementById('box17').children[0].innerHTML === 'O' && document.getElementById('box18').children[0].innerHTML === 'O' && document.getElementById('box19').children[0].innerHTML === 'O') {
-    OWon();
-  }
-}
-
-function checkWinLeftCol() {
-  if (document.getElementById('box1').children[0].innerHTML === 'X' && document.getElementById('box14').children[0].innerHTML === 'X' && document.getElementById('box17').children[0].innerHTML === 'X') {
-    XWon();
-  }
-
-  if (document.getElementById('box1').children[0].innerHTML === 'O' && document.getElementById('box14').children[0].innerHTML === 'O' && document.getElementById('box17').children[0].innerHTML === 'O') {
-    OWon();
-  }
-}
-
-function checkWinMidCol() {
-  if (document.getElementById('box12').children[0].innerHTML === 'X' && document.getElementById('box15').children[0].innerHTML === 'X' && document.getElementById('box18').children[0].innerHTML === 'X') {
-    XWon();
-  }
-
-  if (document.getElementById('box12').children[0].innerHTML === 'O' && document.getElementById('box15').children[0].innerHTML === 'O' && document.getElementById('box18').children[0].innerHTML === 'O') {
-    OWon();
-  }
-}
-
-function checkWinRightCol() {
-  if (document.getElementById('box13').children[0].innerHTML === 'X' && document.getElementById('box16').children[0].innerHTML === 'X' && document.getElementById('box19').children[0].innerHTML === 'X') {
-    XWon();
-  }
-
-  if (document.getElementById('box13').children[0].innerHTML === 'O' && document.getElementById('box16').children[0].innerHTML === 'O' && document.getElementById('box19').children[0].innerHTML === 'O') {
-    OWon();
-  }
-}
-
-function checkWinDiag1() {
-  if (document.getElementById('box1').children[0].innerHTML === 'X' && document.getElementById('box15').children[0].innerHTML === 'X' && document.getElementById('box19').children[0].innerHTML === 'X') {
-    XWon();
-}
-
-if (document.getElementById('box1').children[0].innerHTML === 'O' && document.getElementById('box15').children[0].innerHTML === 'O' && document.getElementById('box19').children[0].innerHTML === 'O') {
-    OWon();
-  }
-}
-
-function checkWinDiag2() {
-  if (document.getElementById('box13').children[0].innerHTML === 'X' && document.getElementById('box15').children[0].innerHTML === 'X' && document.getElementById('box17').children[0].innerHTML === 'X') {
-    XWon();
-}
-
-if (document.getElementById('box13').children[0].innerHTML === 'O' && document.getElementById('box15').children[0].innerHTML === 'O' && document.getElementById('box17').children[0].innerHTML === 'O') {
-    OWon();
-  }
+  if (document.getElementById(firstBox).children[0].innerHTML === 'O' && document.getElementById(secondBox).children[0].innerHTML === 'O' && document.getElementById(thirdBox).children[0].innerHTML === 'O') {
+    winnerIs('O');
+  } 
 }
 
 function checkDraw() {
@@ -134,16 +60,10 @@ function checkDraw() {
   }
 }
 
-function XWon() {
-  alert('X Won');
+function winnerIs(symb) {
+  alert(`${symb} Won`);
   clearGameBoard();
-  tallyX();
-}
-
-function OWon() {
-  alert('O Won');
-  clearGameBoard();
-  tallyO();
+  tally(symb);
 }
 
 function itDrew() {
@@ -154,10 +74,10 @@ function itDrew() {
 
 function clearGameBoard() {
   function clearBox(boxId) {
-    if (document.getElementById(boxId).firstChild) {
-      document.getElementById(boxId).removeChild(document.getElementById(boxId).firstChild);
-    }
+    
+    document.getElementById(boxId).children[0].innerHTML = ' ';
   }
+  
   clearBox('box1');
   clearBox('box12');
   clearBox('box13');
@@ -169,16 +89,10 @@ function clearGameBoard() {
   clearBox('box19');
 }
 
-function tallyX() {
-  let scoreInnerHTML = document.getElementById('inputX').innerHTML
+function tally(symb) {
+  let scoreInnerHTML = document.getElementById(`input${symb}`).innerHTML
   let score = parseInt(scoreInnerHTML, 10)
-  document.getElementById('inputX').innerHTML = score + 1
-}
-
-function tallyO() {
-  let scoreInnerHTML2 = document.getElementById('inputO').innerHTML
-  let score = parseInt(scoreInnerHTML2, 10)
-  document.getElementById('inputO').innerHTML = score + 1
+  document.getElementById(`input${symb}`).innerHTML = score + 1
 }
 
 function tallyDraw() {
