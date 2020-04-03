@@ -7,7 +7,6 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-
 class Checker {
   constructor(color) {
     if (color === 'white') {
@@ -24,24 +23,22 @@ class Board {
     //in play checkers ...
     this.checkers = []
   }
-  // method that creates an 8x8 array, filled with null values
+
   createGrid() {
-    // loop to create the 8 rows
     for (let row = 0; row < 8; row++) {
       this.grid[row] = [];
-      // push in 8 columns of nulls
       for (let column = 0; column < 8; column++) {
         this.grid[row].push(null);
       }
     }
   }
+
   viewGrid() {
     // add our column numbers
     let string = "  0 1 2 3 4 5 6 7\n";
     for (let row = 0; row < 8; row++) {
       // we start with our row number in our array
       const rowOfCheckers = [row];
-      // a loop within a loop
       for (let column = 0; column < 8; column++) {
         // if the location is "truthy" (contains a checker piece, in this case)
         if (this.grid[row][column]) {
@@ -59,7 +56,7 @@ class Board {
     }
     console.log(string);
   }
-  // Your code here
+
   createCheckers() {
     //define our starting positions of the checkers on the grid
     let whitePositions = [[0, 1], [0, 3], [0, 5], [0, 7],
