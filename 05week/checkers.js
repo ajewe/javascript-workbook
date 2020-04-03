@@ -8,13 +8,21 @@ const rl = readline.createInterface({
 });
 
 
-function Checker() {
-  // Your code here
+class Checker {
+  constructor(color) {
+    if (color === 'white') {
+      this.symbol = String.fromCharCode(0x125CB)
+    } else if (color === 'black') {
+      this.symbol = String.fromCharCode(0x125CF)
+    }
+  }
 }
 
 class Board {
   constructor() {
     this.grid = []
+    //in play checkers ...
+    this.checkers = []
   }
   // method that creates an 8x8 array, filled with null values
   createGrid() {
@@ -51,8 +59,54 @@ class Board {
     }
     console.log(string);
   }
-
   // Your code here
+  createCheckers() {
+    //define our starting positions of the checkers on the grid
+    let whitePositions = [[0, 1], [0, 3], [0, 5], [0, 7],
+    [1, 0], [1, 2], [1, 4], [1, 6],
+    [2, 1], [2, 3], [2, 5], [2, 7]]
+
+    let blackPositions = [[5, 0], [5, 2], [5, 4], [5, 6],
+    [6, 1], [6, 3], [6, 5], [6, 7],
+    [7, 0], [7, 2], [7, 4], [7, 6]]
+
+    //in a for loop, iterate over the range from 0-11 with each index
+    //you want to instantiate a 'white/black' checker
+    for (let i = 0; i < whitePositions.length; i++) {
+      let whitePos = whitePositions[i]
+      //instantiate a 'white' checker
+      //place that checker on the grid at the corresponding position 
+      //with the index in the positions array
+      let whiteCheck = new Checker('white');
+      this.grid[whitePos[0]][whitePos[1]] = whiteCheck
+
+      //push the checker into your this.checkers array
+      this.checkers.push(whiteCheck)
+    }
+
+    for (let j = 0; j < blackPositions.length; j++) {
+      let blackPos = blackPositions[j]
+      //instantiate a 'black' checker
+      //place that checker on the grid at the corresponding position 
+      //with the index in the positions array
+      let blackCheck = new Checker('black');
+      this.grid[blackPos[0]][blackPos[1]] = blackCheck
+      //push the checker into your this.checkers array
+      this.checkers.push(blackCheck)
+    }
+  }
+
+  selectChecker(row, column) {
+    //return the checker at that spot on this.grid
+    return this.grid[row][column];
+  }
+
+  killChecker(position){
+    let checker = this.selectChecker(position[0], position[1]);
+    let spliceOutChecker = this.checkers.indexOf(checker);
+    this.checkers.splice(spliceOutChecker, 1);
+    this.grid[position[0]][position[1]] = null;
+  }
 }
 
 class Game {
@@ -61,6 +115,31 @@ class Game {
   }
   start() {
     this.board.createGrid();
+    this.board.createCheckers();
+  }
+
+  moveChecker(start, end) {
+    let splitStart = start.split('');
+    let splitEnd = end.split('');
+
+    let checker = this.board.selectChecker(splitStart[0], splitStart[1]);
+    this.board.grid[splitStart[0]][splitStart[1]] = null;
+    //set the spot at the end rowcol coord to the checker
+    this.board.grid[splitEnd[0]][splitEnd[1]] = checker
+    //check to see if the distance of the start and end row is 2
+    let absoluteRow = Math.abs(splitStart[0] - splitEnd[0]);
+
+    let posRow = (splitEnd[0] - splitStart[0])/2;
+    let posColumn = (splitEnd[1] - splitStart[1])/2;
+    
+    let killPosRow = splitEnd[0] - posRow;
+    let killPosCol = splitEnd[1] - posColumn;
+
+    if (absoluteRow === 2) {
+      let killPosition = []
+      killPosition.push(killPosRow, killPosCol);
+      return this.board.killChecker(killPosition);
+    }
   }
 }
 
@@ -79,6 +158,7 @@ game.start();
 
 
 // Tests
+
 if (typeof describe === 'function') {
   describe('Game', () => {
     it('should have a board', () => {
