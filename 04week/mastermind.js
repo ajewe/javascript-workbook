@@ -36,7 +36,6 @@ function generateHint(guess) {
   let redPegs = 0;
   let whitePegs = 0;
 
-  //check for redPegs
   for (let i = 0; i < solutionArray.length; i++) {
     if (solutionArray[i] === guessArray[i]) {
       redPegs++;
@@ -44,7 +43,6 @@ function generateHint(guess) {
     }
   }
 
-  //check for whitePegs
   for (let i = 0; i < guessArray.length; i++) {
     let targetIndex = solutionArray.indexOf(guessArray[i]);
 
@@ -53,8 +51,7 @@ function generateHint(guess) {
       solutionArray[targetIndex] = null;
     }
     };
-  //return a string representation of redPegs and whitePegs variables
-  return `${redPegs}-${whitePegs}`;
+  return `Red Pegs: ${redPegs}, White Pegs: ${whitePegs}`;
 };
 
 function mastermind(guess) {
