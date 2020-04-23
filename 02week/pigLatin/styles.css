@@ -1,0 +1,31 @@
+body {
+  background-color: hotpink;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#text-box {
+  display: block;
+  margin: 100px 10px 10px;
+  font-size: 16px;
+  width: 500px;
+  height: 60px;
+  word-break: break-all;
+
+}
+
+p {
+  border: 2px solid black;
+  height: 60px;
+  width: 480px;
+  background-color: rgba(243, 243, 243, 0.493);
+  padding: 10px;
+  color: black;
+  font-size: 16px;
+}
+
+#button {
+  margin:10px 10px 25px;
+  width: 100px;
+}
