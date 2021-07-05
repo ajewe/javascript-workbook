@@ -19,24 +19,79 @@ function printStacks() {
   console.log("c: " + stacks.c);
 }
 
-function movePiece() {
-  // Your code here
-
+function movePiece(start, end) {
+  let startStack = stacks[start];
+  let endStack = stacks[end];
+  //splice off the last element of the start array
+  let splicedStart = startStack.pop();
+  //add it to the end of the end array
+  endStack.push(splicedStart);
 }
 
-function isLegal() {
-  // Your code here
+function isLegal(start, end) {
 
+  let startArray = stacks[start];
+  let endArray = stacks[end];
+
+  // Illegal because moving from empty stack
+  if (startArray.length === 0) {
+    console.log('invalid move!');
+    return false;
+  }
+  // if end column is empty, move is legal
+  if (endArray.length === 0) {
+    return true;
+  }
+
+  let startElement = startArray[startArray.length - 1];
+  let endElement = endArray[endArray.length - 1];
+
+  if (start === end) {
+    console.log('invalid move!');
+    return false;
+  }
+
+  //if the last element of the end column has a higher number, not legal
+  if (startElement > endElement ) {
+    console.log('invalid move!');
+    return false;
+  } 
+  return true;
+}
+
+function checkArrayMatch(checkArray, winningArray) {
+  if (checkArray.length !== winningArray.length) {
+    return false;
+  } else {
+    for (let i=0; i<checkArray.length; i++) {
+      if (checkArray[i] !== winningArray[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
 }
 
 function checkForWin() {
-  // Your code here
-
+  let checkbArray = stacks['b'];
+  let checkcArray = stacks['c'];
+  let winningArray = [4, 3, 2, 1];
+  let checkB = checkArrayMatch(checkbArray, winningArray);
+  let checkC = checkArrayMatch(checkcArray, winningArray)
+  
+  if (checkB || checkC) {
+    console.log('Weiner!!!!!')
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function towersOfHanoi(startStack, endStack) {
-  // Your code here
-
+  if (isLegal(startStack, endStack)) {
+    movePiece(startStack, endStack);
+    checkForWin();
+  }
 }
 
 function getPrompt() {
@@ -87,8 +142,36 @@ if (typeof describe === 'function') {
     });
   });
 
+  //new test 1
+  describe('#isLegal()', () => {
+    it('not allow move to same stack', () => {
+      stacks = {
+        a: [4, 3, 2],
+        b: [1],
+        c: []
+      };
+      assert.equal(isLegal('a', 'a'), false);
+  });
+  });
+
+  //new test 2
+  describe('#checkArrayMatch()', () => {
+    it('returns true if arrays match', () => {
+      let arry1 = [1,2,3]
+      let arry2 = [1,2,3]
+
+      assert.equal(checkArrayMatch(arry1, arry2), true);
+    })
+  });
+
+  //new test 3
+  describe('#checkForWin() in C', () => {
+    it('should detect a win IN C', () => {
+      stacks = { a: [], b: [], c: [4, 3, 2, 1] };
+      assert.equal(checkForWin(), true);
+    });
+  });
+
 } else {
-
   getPrompt();
-
 }
